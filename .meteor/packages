@@ -1,0 +1,20 @@
+# core
+meteor-base
+mobile-experience
+mongo
+blaze-html-templates
+reactive-var
+jquery
+tracker
+standard-minifier-css
+standard-minifier-js
+es5-shim
+ecmascript
+session
+
+# community
+kadira:blaze-layout
+kadira:flow-router
+materialize:materialize
+digix:light-wallet-ui-materialize
+silentcicero:solc

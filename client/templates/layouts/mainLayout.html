@@ -1,0 +1,12 @@
+<template name="mainLayout">
+  {{> navbar}}
+  <main>
+    <div class="container">
+      {{#if ready}}
+        {{> Template.dynamic template=main}}
+      {{else}}
+        <p>Loading...</p>
+      {{/if}}
+    </div>
+  </main>
+</template>

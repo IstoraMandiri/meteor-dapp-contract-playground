@@ -1,0 +1,22 @@
+{
+  "name": "contract-playground",
+  "private": true,
+  "scripts": {
+    "start": "meteor run"
+  },
+  "dependencies": {
+    "async": "^2.0.0-rc.3",
+    "meteor-node-stubs": "~0.2.0"
+  },
+  "standard":{
+    "globals": [
+      "Meteor",
+      "Template",
+      "Session",
+      "contracts",
+      "web3",
+      "lightWallet",
+      "ReactiveVar"
+    ]
+  }
+}

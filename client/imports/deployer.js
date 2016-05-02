@@ -6,6 +6,11 @@ import { lightWallet } from 'meteor/digix:light-wallet-ui-materialize'
 // deploy a contract and keep it's address persistent over refreshes
 Session.set('ready', false)
 
+// a quick 'n' dirty hash function
+const hashCode = function (s) {
+  return s.split('').reduce(function(a,b){a=((a<<5)-a)+b.charCodeAt(0);return a&a},0);
+}
+
 const stickyDeploy = function (obj, callback) {
   // just in case we need to redeploy
   let $modal
@@ -14,13 +19,15 @@ const stickyDeploy = function (obj, callback) {
     obj[key].key = key
   })
   // asyncronously deal with each contract instance
-  async.map(obj, (obj, callback) => {
+  async.mapSeries(obj, (obj, callback) => {
     // default empty parms if not set
     if (!obj.params) { obj.params = [] }
     // all contracts need to have their `eth` overriden due to `solc` compiler
     obj.contract.eth = web3.eth
-    // check if we have previously deployed a contract with this name
-    const storageKey = `stickyDeploy_${obj.key}`
+    // check if we have previously deployed a contract with this name, params and bytecode hash
+    // this let's hot code push on the contract override on changes
+    const uniqueKey = hashCode(`${obj.key}_${obj.params.join(',')}_${obj.contract.bytecode}`)
+    const storageKey = `stickyDeploy_${uniqueKey}`
     const existingAddrress = window.localStorage.getItem(storageKey)
     // define our deploy function, but don't call it yet...
     const deployContract = function () {

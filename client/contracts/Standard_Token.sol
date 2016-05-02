@@ -6,8 +6,6 @@ Implements ERC 20 Token standard: https://github.com/ethereum/EIPs/issues/20
 
 contract Token {
 
-    uint public testValue;
-
     /// @return total amount of tokens
     function totalSupply() constant returns (uint256 supply) {}
 

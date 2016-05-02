@@ -9,17 +9,20 @@ cd ~/Desktop
 git clone https://github.com/hitchcott/meteor-dapp-contract-playground
 ```
 
-Clone the pre-release light wallet alongside this folder
+Clone the pre-release light wallet alongside this folder and build `core`:
 
 ```
 git clone https://github.com/hitchcott/lw-alpha-test
+cd lw-alpha-test/packages/core
+npm i
 ```
 
 Start Meteor, with `PACKAGE_DIRS`. (Replace `YOURNAME`)
 
 ```
-cd meteor-dapp-contract-playground
+cd ~/Desktop/meteor-dapp-contract-playground
 npm i
+# this next step might take a while with slow internet; time to grab a sandwich
 PACKAGE_DIRS='/Users/YOURNAME/Desktop/lw-alpha-test/packages' meteor
 ```
 
@@ -36,8 +39,10 @@ geth account new
 Now start `geth`, using the mining script. (Replace `YOURNAME`)
 
 ```
-geth --dev --rpc --rpccorsdomain "*" --maxpeers 0 --nodiscover js /Users/YOURNAME/meteor-dapp-contract-playground/private/miner.js
+geth --dev --rpc --rpccorsdomain "*" --maxpeers 0 --nodiscover js /Users/YOURNAME/Desktop/meteor-dapp-contract-playground/private/miner.js
 ```
+
+Now pop over to `http://localhost:3000`
 
 The first time you initialize, you'll see a popup message asking to send some ETH to your light wallet some ether.
 
